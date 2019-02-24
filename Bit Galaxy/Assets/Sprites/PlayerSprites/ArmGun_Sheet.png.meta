@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: 127f0fcbf362f714e88a1026de3bb5e4
+guid: 09e933430f8ea0249b0e614a8a1948f6
 TextureImporter:
   fileIDToRecycleName:
-    21300000: PlayerRunSheet_0
-    21300002: PlayerRunSheet_1
-    21300004: PlayerRunSheet_2
-    21300006: PlayerRunSheet_3
+    21300000: ArmGun_Sheet_0
+    21300002: ArmGun_Sheet_1
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -121,81 +119,41 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerRunSheet_0
+      name: ArmGun_Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 32
         height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.25, y: 0.405}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f43ca56a4e0570c47b34fd960cf03adb
+      spriteID: 6cb313e6535002c4ab39cb9af0853db1
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerRunSheet_1
+      name: ArmGun_Sheet_1
       rect:
         serializedVersion: 2
         x: 32
         y: 0
         width: 32
         height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.25, y: 0.405}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 968b5c2fc431a2943a029e6931f855ad
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerRunSheet_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a524a04eba422c947ba99989ae4aff3b
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlayerRunSheet_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c35b1286a87108f4090c85eb2163f65b
+      spriteID: 5ad4f3b98a76b714388812ba469845bd
       vertices: []
       indices: 
       edges: []
@@ -203,7 +161,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 92415891eb725554d9b77800d382f7f4
+    spriteID: 095b8e487cf69fc4e9cddaf54db836fb
     vertices: []
     indices: 
     edges: []

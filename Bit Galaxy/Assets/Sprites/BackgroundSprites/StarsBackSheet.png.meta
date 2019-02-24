@@ -1,9 +1,10 @@
 fileFormatVersion: 2
-guid: 920ec33a75365af48981aba3934d3dd6
+guid: ee3f1c5587d30634db535d1e750aa5d0
 TextureImporter:
   fileIDToRecycleName:
-    21300000: PlayerIdleSheet_0
-    21300002: PlayerIdleSheet_1
+    21300000: StarsBackSheet_0
+    21300002: StarsBackSheet_1
+    21300004: StarsBackSheet_2
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -47,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -106,9 +107,9 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   - serializedVersion: 2
     buildTarget: WebGL
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
-    textureFormat: 2
+    textureFormat: 12
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -119,13 +120,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlayerIdleSheet_0
+      name: StarsBackSheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 960
+        height: 540
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,19 +134,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 408abf561f45f6f4aaef83f7b4662e00
+      spriteID: cb462d2b745bf2d42b93d4b65ca45a5b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlayerIdleSheet_1
+      name: StarsBackSheet_1
       rect:
         serializedVersion: 2
-        x: 32
+        x: 960
         y: 0
-        width: 32
-        height: 32
+        width: 960
+        height: 540
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,7 +154,27 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 94831cb7ac6c012469a450a377d86e71
+      spriteID: 43ab96e9094222c4b9ba53a5e196dc7c
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StarsBackSheet_2
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 960
+        height: 540
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de7a713ab103aa24ca220e4acbdfb55b
       vertices: []
       indices: 
       edges: []
@@ -161,7 +182,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: ef5596bc056c0d24dbc54e0b06a88243
+    spriteID: f5440d9d92dc4db43b08417ddd2205d0
     vertices: []
     indices: 
     edges: []

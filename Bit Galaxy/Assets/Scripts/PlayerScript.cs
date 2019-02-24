@@ -7,13 +7,16 @@ public class PlayerScript : MonoBehaviour
     public PlanetScript planet;
     private Rigidbody2D playerBody;
     private Transform playerTransform;
+    private Animator playerAnim;
 
     private float moveSpeed = 5f;
+    private float h_Move;
     private Vector2 moveDir;
 
     void Awake() {
       playerTransform = transform;
       playerBody = GetComponent<Rigidbody2D>();
+      playerAnim = GetComponent<Animator>();
     }
     // Start is called before the first frame update
     void Start()
@@ -35,7 +38,21 @@ public class PlayerScript : MonoBehaviour
     }
 
     void PlayerController() {
-      moveDir = new Vector2(Input.GetAxisRaw("Horizontal"), 0f).normalized;
+      h_Move = Input.GetAxisRaw("Horizontal");
+      moveDir = new Vector2(h_Move, 0f).normalized;
+      playerAnim.SetInteger("Speed", (int)moveDir.x);
+      ChangeDirection(h_Move);
+    }
+
+    void ChangeDirection(float direction) {
+      Vector3 tempScale = transform.localScale;
+      if(direction > 0f) {
+        tempScale.x = 1f;
+      } else if(direction < 0f) {
+        tempScale.x = -1f;
+      }
+      transform.localScale = tempScale;
+      transform.GetChild(0).gameObject.transform.localScale = tempScale;
     }
 
 }//class

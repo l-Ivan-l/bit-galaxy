@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlanetScript : MonoBehaviour
 {
-    private float gravity = -25f;
+    private float gravity = -30f;
 
     public void Attract(Transform body, Rigidbody2D physxBody) {
       Vector3 gravityUp = (body.position - transform.position).normalized;
