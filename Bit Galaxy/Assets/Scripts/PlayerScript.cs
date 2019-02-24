@@ -8,7 +8,7 @@ public class PlayerScript : MonoBehaviour
     private Rigidbody2D playerBody;
     private Transform playerTransform;
 
-    private float moveSpeed = 10f;
+    private float moveSpeed = 5f;
     private Vector2 moveDir;
 
     void Awake() {
