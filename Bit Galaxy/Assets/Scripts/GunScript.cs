@@ -7,6 +7,7 @@ public class GunScript : MonoBehaviour
     private float speed = 15f;
     public Transform firePoint;
     public GameObject bullet;
+    public GameObject fireEffect;
 
     // Update is called once per frame
     void Update()
@@ -21,6 +22,7 @@ public class GunScript : MonoBehaviour
 
     void Shoot() {
       if(Input.GetButtonDown("Shoot_Btn")) {
+        Instantiate(fireEffect, firePoint.position, transform.rotation);
         Instantiate(bullet, firePoint.position, transform.rotation);
       }
     }
