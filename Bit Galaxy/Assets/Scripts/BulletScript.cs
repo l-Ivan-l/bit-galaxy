@@ -15,9 +15,19 @@ public class BulletScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      Camera.CamShake();
       bulletBody.velocity = transform.right * speed;
       Destroy(gameObject, 0.8f);
+    }
+
+    void OnCollisionEnter2D(Collision2D target) {
+      if(target.gameObject.CompareTag("Planet")) {
+        Destroy(gameObject);
+      }
+    }
+
+    public void DestroyBullet() {
+      Camera.CamShake();
+      Destroy(gameObject);
     }
 
 }//class
