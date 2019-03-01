@@ -19,6 +19,7 @@ public class MeteoriteScript : MonoBehaviour
     {
       meteoriteSpeed = 0.3f;
       rotationSpeed = 20f;
+      RandomSize();
     }
 
     void Update() {
@@ -29,6 +30,13 @@ public class MeteoriteScript : MonoBehaviour
     void FixedUpdate()
     {
       meteoriteBody.MovePosition(Vector2.Lerp(transform.position, meteoriteAttractor.position, meteoriteSpeed * Time.deltaTime));
+    }
+
+    void RandomSize() {
+      Vector3 scaleVector = transform.localScale;
+      scaleVector.x = Random.Range(0.75f, 1.5f);
+      scaleVector.y = scaleVector.x;
+      transform.localScale = scaleVector;
     }
 
     void OnCollisionEnter2D(Collision2D target) {

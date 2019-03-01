@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -13,6 +14,16 @@ public class GameController : MonoBehaviour
 
     private bool musicOn;
     private bool soundsOn;
+
+    //Time variables
+    private float timePlanet;
+  	private float escalaDeTiempo = -1;
+
+  	public Text timeText;
+  	private float tiempoDelFrameConTimeScale;
+  	private float tiempoAMostrarEnSegundos;
+  	private float escalaDeTiempoAlPausar, escalaDeTiempoInicial;
+  	private bool isPaused = false;
 
     void Awake() {
       if(Instance == null) {
@@ -28,10 +39,18 @@ public class GameController : MonoBehaviour
       score = 0;
       planetsSaved = 0;
       timeBetweenSpawns = 2f;
+
+      timePlanet = 11;
+      escalaDeTiempoInicial = escalaDeTiempo;
+      tiempoAMostrarEnSegundos = timePlanet;
+      ActualizarReloj(timePlanet);
     }
 
     void Update() {
       ProgressionFunction();
+      tiempoDelFrameConTimeScale = Time.deltaTime * escalaDeTiempo;
+      tiempoAMostrarEnSegundos += tiempoDelFrameConTimeScale;
+      ActualizarReloj(tiempoAMostrarEnSegundos);
     }
 
     void ProgressionFunction() {
@@ -75,6 +94,43 @@ public class GameController : MonoBehaviour
     public void SetPlanetsSaved(int _planets) {
       planetsSaved += _planets;
     }
+
+    //Time functions
+    void ActualizarReloj(float tiempoEnSegundos) {
+  		int segundos = 0;
+  		string TextoDelReloj;
+
+  		if (tiempoEnSegundos < 0) {
+  			//Change Planet
+  		}
+
+  		segundos = (int)tiempoEnSegundos % 60;
+  		TextoDelReloj = segundos.ToString();
+
+  		timeText.text = TextoDelReloj;
+  	}
+
+    public void Pausar() {
+  		if (!isPaused) {
+  			isPaused = true;
+  			escalaDeTiempoAlPausar = escalaDeTiempo;
+  			escalaDeTiempo = 0;
+  		}
+  	}
+
+  	public void Continuar() {
+  		if (isPaused) {
+  			isPaused = false;
+  			escalaDeTiempo = escalaDeTiempoAlPausar;
+  		}
+  	}
+
+  	public void Reiniciar() {
+  		isPaused = false;
+  		escalaDeTiempo = escalaDeTiempoInicial;
+  		tiempoAMostrarEnSegundos = timePlanet;
+  		ActualizarReloj(tiempoAMostrarEnSegundos);
+  	}
 
     public void GameOver() {
 

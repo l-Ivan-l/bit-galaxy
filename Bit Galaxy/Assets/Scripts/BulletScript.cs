@@ -8,6 +8,8 @@ public class BulletScript : MonoBehaviour
     private Rigidbody2D bulletBody;
     private CameraScript Camera;
 
+    public GameObject bulletExplosion;
+
     void Awake() {
       bulletBody = GetComponent<Rigidbody2D>();
       Camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>();
@@ -22,11 +24,13 @@ public class BulletScript : MonoBehaviour
     void OnCollisionEnter2D(Collision2D target) {
       if(target.gameObject.CompareTag("Planet")) {
         Destroy(gameObject);
+        Instantiate(bulletExplosion, transform.position, transform.rotation);
       }
     }
 
     public void DestroyBullet() {
       Camera.CamShake();
+      Instantiate(bulletExplosion, transform.position, transform.rotation);
       Destroy(gameObject);
     }
 
