@@ -25,6 +25,14 @@ public class GameController : MonoBehaviour
   	private float escalaDeTiempoAlPausar, escalaDeTiempoInicial;
   	private bool isPaused = false;
 
+    public MeteoriteManager meteoriteSystem;
+    public PlayerScript player;
+    private PlanetScript currentPlanet;
+    public GameObject teletransportEffect;
+    public Transform playerPos;
+    public GameObject planetPrefab;
+    public Transform rightPos;
+
     void Awake() {
       if(Instance == null) {
         Instance = this;
@@ -40,10 +48,12 @@ public class GameController : MonoBehaviour
       planetsSaved = 0;
       timeBetweenSpawns = 2f;
 
-      timePlanet = 11;
+      timePlanet = 10;
       escalaDeTiempoInicial = escalaDeTiempo;
       tiempoAMostrarEnSegundos = timePlanet;
       ActualizarReloj(timePlanet);
+      Pausar();
+      StartCoroutine(StartGame(2f));
     }
 
     void Update() {
@@ -51,6 +61,13 @@ public class GameController : MonoBehaviour
       tiempoDelFrameConTimeScale = Time.deltaTime * escalaDeTiempo;
       tiempoAMostrarEnSegundos += tiempoDelFrameConTimeScale;
       ActualizarReloj(tiempoAMostrarEnSegundos);
+    }
+
+    IEnumerator StartGame(float timer) {
+      yield return new WaitForSeconds(timer);
+      Instantiate(teletransportEffect, transform.position, Quaternion.identity);
+      player.Teletransport_In(playerPos.position);
+      Continuar();
     }
 
     void ProgressionFunction() {
@@ -95,6 +112,36 @@ public class GameController : MonoBehaviour
       planetsSaved += _planets;
     }
 
+    void ChangePlanet() {
+      StartCoroutine(PlanetToDestroy(0.4f));
+      planetsSaved += 1;
+      meteoriteSystem.StopMeteorites();
+      Instantiate(teletransportEffect, transform.position, Quaternion.identity);
+      player.Teletransport_Out();
+      Pausar();
+    }
+
+    IEnumerator PlanetToDestroy(float timer) {
+      yield return new WaitForSeconds(timer);
+      Instantiate(planetPrefab, rightPos.position, transform.rotation);
+      currentPlanet.planetState = 2;
+      StartCoroutine(GameContinue(1.2f));
+    }
+
+    IEnumerator GameContinue(float timer) {
+      yield return new WaitForSeconds(timer);
+      Instantiate(teletransportEffect, transform.position, Quaternion.identity);
+      player.Teletransport_In(playerPos.position);
+      Continuar();
+      meteoriteSystem.StartMeteorites();
+    }
+
+    void OnTriggerEnter2D(Collider2D target) {
+      if(target.gameObject.CompareTag("Planet")) {
+        currentPlanet = target.gameObject.GetComponent<PlanetScript>();
+      }
+    }
+
     //Time functions
     void ActualizarReloj(float tiempoEnSegundos) {
   		int segundos = 0;
@@ -102,6 +149,8 @@ public class GameController : MonoBehaviour
 
   		if (tiempoEnSegundos < 0) {
   			//Change Planet
+        Reiniciar();
+        ChangePlanet();
   		}
 
   		segundos = (int)tiempoEnSegundos % 60;

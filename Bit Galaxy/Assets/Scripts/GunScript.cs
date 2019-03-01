@@ -5,9 +5,15 @@ using UnityEngine;
 public class GunScript : MonoBehaviour
 {
     private float speed = 15f;
+    [HideInInspector]
+    public bool canShoot;
     public Transform firePoint;
     public GameObject bullet;
     public GameObject fireEffect;
+
+    void Start() {
+      canShoot = false;
+    }
 
     // Update is called once per frame
     void Update()
@@ -22,8 +28,10 @@ public class GunScript : MonoBehaviour
 
     void Shoot() {
       if(Input.GetButtonDown("Shoot_Btn")) {
-        Instantiate(fireEffect, firePoint.position, transform.rotation);
-        Instantiate(bullet, firePoint.position, transform.rotation);
+        if(canShoot) {
+          Instantiate(fireEffect, firePoint.position, transform.rotation);
+          Instantiate(bullet, firePoint.position, transform.rotation);
+        }
       }
     }
 

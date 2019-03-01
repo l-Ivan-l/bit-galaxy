@@ -17,6 +17,14 @@ public class PlanetScript : MonoBehaviour
     private SpriteRenderer backRender;
     private SpriteRenderer frontRender;
 
+    private float planetTranslationSpeed;
+    private float starsTranslationSpeed;
+    public int planetState;
+
+    public Transform centerPos;
+    public Transform leftPos;
+    public Transform rightPos;
+
     void Awake() {
       baseRender = GetComponent<SpriteRenderer>();
       backRender = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
@@ -25,6 +33,23 @@ public class PlanetScript : MonoBehaviour
 
     void Start() {
       GeneratePlanet();
+      planetState = 1;
+      planetTranslationSpeed = 20f;
+    }
+
+    void Update() {
+      switch(planetState) {
+        case 1:
+          PlanetToCenter();
+        break;
+
+        case 2:
+          PlanetToLeft();
+        break;
+
+        default:
+        break;
+      }
     }
 
     void GeneratePlanet() {
@@ -61,11 +86,27 @@ public class PlanetScript : MonoBehaviour
       body.rotation = Quaternion.Slerp(body.rotation, targetRotation, 50 * Time.deltaTime);
     }
 
+    void PlanetToCenter() {
+      transform.position = Vector3.MoveTowards(transform.position, centerPos.position, planetTranslationSpeed * Time.deltaTime);
+    }
+
+    void PlanetToLeft() {
+      transform.position = Vector3.MoveTowards(transform.position, leftPos.position, planetTranslationSpeed * Time.deltaTime);
+      if(transform.position == leftPos.position) {
+        StartCoroutine(DestroyPlanet(0.5f));
+      }
+    }
+
     public void PlanetHited() {
       planetLife -= 1;
       if(planetLife <= 0) {
         //GAME OVER
       }
+    }
+
+    IEnumerator DestroyPlanet(float timer) {
+      yield return new WaitForSeconds(timer);
+      Destroy(gameObject);
     }
 
 }//class

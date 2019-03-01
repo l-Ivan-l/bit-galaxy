@@ -9,12 +9,13 @@ public class MeteoriteManager : MonoBehaviour
     private int meteoriteIndex;
 
     private float time;
+    private IEnumerator coroutine;
 
     // Start is called before the first frame update
     void Start()
     {
       time = GameController.Instance.GetTime();
-      StartCoroutine(SpawnMeteorite(0f));
+      StartMeteorites();
     }
 
     // Update is called once per frame
@@ -28,7 +29,18 @@ public class MeteoriteManager : MonoBehaviour
       spawnIndex = Random.Range(0, transform.childCount);
       meteoriteIndex = Random.Range(0, Meteorite.Length);
       Instantiate(Meteorite[meteoriteIndex], transform.GetChild(spawnIndex).position, Quaternion.identity);
-      StartCoroutine(SpawnMeteorite(time));
+      coroutine = SpawnMeteorite(time);
+      StartCoroutine(coroutine);
+    }
+
+    public void StopMeteorites() {
+      Debug.Log("Meteorites stopped");
+      StopCoroutine(coroutine);
+    }
+
+    public void StartMeteorites() {
+      Debug.Log("Meteorites start");
+      StartCoroutine(SpawnMeteorite(2f));
     }
 
 }//class
