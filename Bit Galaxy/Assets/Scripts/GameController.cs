@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameController : MonoBehaviour
     private int difficultLevel;
     private float timeBetweenSpawns;
     private int score;
+    private int highScore;
     private int planetsSaved;
 
     private bool musicOn;
@@ -40,9 +42,6 @@ public class GameController : MonoBehaviour
     void Awake() {
       if(Instance == null) {
         Instance = this;
-        DontDestroyOnLoad(gameObject);
-      } else {
-        Destroy(gameObject);
       }
     }
 
@@ -66,6 +65,11 @@ public class GameController : MonoBehaviour
       tiempoAMostrarEnSegundos += tiempoDelFrameConTimeScale;
       ActualizarReloj(tiempoAMostrarEnSegundos);
       scoreText.text = "Score: " + score.ToString();
+
+      if(score > Singleton.GetInstance().HighScore) {
+        Singleton.GetInstance().HighScore = score;
+      }
+      Singleton.GetInstance().TotalPlanets = planetsSaved;
     }
 
     IEnumerator StartGame(float timer) {
@@ -147,7 +151,7 @@ public class GameController : MonoBehaviour
       planetsSaved += 1;
       planetsSavedText.text = "Planets: " + planetsSaved.ToString();
       meteoriteSystem.StopMeteorites();
-      Instantiate(teletransportEffect, transform.position, Quaternion.identity);
+      Instantiate(teletransportEffect, transform.position, player.gameObject.transform.rotation);
       player.Teletransport_Out();
       Pausar();
     }
@@ -223,7 +227,12 @@ public class GameController : MonoBehaviour
   	}
 
     public void GameOver() {
+      StartCoroutine(LoadScene("GameOver"));
+    }
 
+    IEnumerator LoadScene(string sceneName) {
+      yield return new WaitForSeconds(0.1f);
+      SceneManager.LoadScene(sceneName);
     }
 
 }//class

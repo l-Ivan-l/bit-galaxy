@@ -7,6 +7,7 @@ TagManager:
   - Meteorite
   - Bullet
   - Planet
+  - LifeBar
   layers:
   - Default
   - TransparentFX

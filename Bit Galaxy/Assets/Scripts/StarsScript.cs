@@ -5,6 +5,7 @@ using UnityEngine;
 public class StarsScript : MonoBehaviour
 {
     private float starsTranslationSpeed;
+    [HideInInspector]
     public int starsState;
     public Transform centerPos;
     public Transform leftPos;

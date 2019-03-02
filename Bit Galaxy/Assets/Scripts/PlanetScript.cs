@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlanetScript : MonoBehaviour
 {
     private float gravity = -30f;
-    private int planetLife = 3;
+    private float planetLife = 3f;
+    private float currentLife;
 
     public Sprite[] planetDetails = new Sprite[10];
     private int backDetailsIndex;
@@ -18,11 +20,14 @@ public class PlanetScript : MonoBehaviour
     private SpriteRenderer frontRender;
 
     private float planetTranslationSpeed;
+    [HideInInspector]
     public int planetState;
 
     public Transform centerPos;
     public Transform leftPos;
     public Transform rightPos;
+
+    private Image lifeBar;
 
     void Awake() {
       baseRender = GetComponent<SpriteRenderer>();
@@ -34,6 +39,9 @@ public class PlanetScript : MonoBehaviour
       GeneratePlanet();
       planetState = 1;
       planetTranslationSpeed = 20f;
+      lifeBar = GameObject.FindWithTag("LifeBar").GetComponent<Image>();
+      currentLife = planetLife;
+  		lifeBar.fillAmount = currentLife / planetLife;
     }
 
     void Update() {
@@ -97,9 +105,11 @@ public class PlanetScript : MonoBehaviour
     }
 
     public void PlanetHited() {
-      planetLife -= 1;
-      if(planetLife <= 0) {
+      currentLife -= 1f;
+      lifeBar.fillAmount = currentLife / planetLife;
+      if(currentLife <= 0f) {
         //GAME OVER
+        GameController.Instance.GameOver();
       }
     }
 
