@@ -40,7 +40,7 @@ public class MeteoriteManager : MonoBehaviour
 
     public void StartMeteorites() {
       Debug.Log("Meteorites start");
-      StartCoroutine(SpawnMeteorite(2f));
+      StartCoroutine(SpawnMeteorite(0f));
     }
 
 }//class

@@ -42,6 +42,7 @@ public class MeteoriteScript : MonoBehaviour
     void OnCollisionEnter2D(Collision2D target) {
       if(target.gameObject.CompareTag("Bullet")) {
         //Aumentar score aquí
+        GameController.Instance.SetScore(5);
         target.gameObject.GetComponent<BulletScript>().DestroyBullet();
         DestroyMeteorite();
       } else if(target.gameObject.CompareTag("Planet")) {

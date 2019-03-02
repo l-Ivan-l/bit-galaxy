@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
   	private float escalaDeTiempo = -1;
 
   	public Text timeText;
+    public Text scoreText;
+    public Text planetsSavedText;
   	private float tiempoDelFrameConTimeScale;
   	private float tiempoAMostrarEnSegundos;
   	private float escalaDeTiempoAlPausar, escalaDeTiempoInicial;
@@ -32,6 +34,8 @@ public class GameController : MonoBehaviour
     public Transform playerPos;
     public GameObject planetPrefab;
     public Transform rightPos;
+    public StarsScript starsBack_01;
+    public StarsScript starsBack_02;
 
     void Awake() {
       if(Instance == null) {
@@ -61,6 +65,7 @@ public class GameController : MonoBehaviour
       tiempoDelFrameConTimeScale = Time.deltaTime * escalaDeTiempo;
       tiempoAMostrarEnSegundos += tiempoDelFrameConTimeScale;
       ActualizarReloj(tiempoAMostrarEnSegundos);
+      scoreText.text = "Score: " + score.ToString();
     }
 
     IEnumerator StartGame(float timer) {
@@ -71,11 +76,20 @@ public class GameController : MonoBehaviour
     }
 
     void ProgressionFunction() {
-      if(score >= 100) {
+      if(score >= 50 && score <= 99) {
         difficultLevel = 2;
-      } else if(score >= 250) {
+      } else if(score >= 100 && score <= 199) {
         difficultLevel = 3;
+      } else if(score >= 200 && score <= 299) {
+        difficultLevel = 4;
+      } else if(score >= 300 && score <= 399) {
+        difficultLevel = 5;
+      } else if(score >= 400 && score <= 499) {
+        difficultLevel = 6;
+      } else if(score >= 500 && score <= 599) {
+        difficultLevel = 7;
       }
+
 
       switch(difficultLevel) {
         case 1:
@@ -87,7 +101,23 @@ public class GameController : MonoBehaviour
         break;
 
         case 3:
+          timeBetweenSpawns = 1.5f;
+        break;
+
+        case 4:
+          timeBetweenSpawns = 1.25f;
+        break;
+
+        case 5:
           timeBetweenSpawns = 1f;
+        break;
+
+        case 6:
+          timeBetweenSpawns = 0.75f;
+        break;
+
+        case 7:
+          timeBetweenSpawns = 0.5f;
         break;
       }
     }
@@ -115,6 +145,7 @@ public class GameController : MonoBehaviour
     void ChangePlanet() {
       StartCoroutine(PlanetToDestroy(0.4f));
       planetsSaved += 1;
+      planetsSavedText.text = "Planets: " + planetsSaved.ToString();
       meteoriteSystem.StopMeteorites();
       Instantiate(teletransportEffect, transform.position, Quaternion.identity);
       player.Teletransport_Out();
@@ -125,6 +156,16 @@ public class GameController : MonoBehaviour
       yield return new WaitForSeconds(timer);
       Instantiate(planetPrefab, rightPos.position, transform.rotation);
       currentPlanet.planetState = 2;
+      if(starsBack_01.starsState == 2) {
+        starsBack_01.starsState = 1;
+      } else if(starsBack_01.starsState == 3) {
+        starsBack_01.starsState = 2;
+      }
+      if(starsBack_02.starsState == 2) {
+        starsBack_02.starsState = 1;
+      } else if(starsBack_02.starsState == 3) {
+        starsBack_02.starsState = 2;
+      }
       StartCoroutine(GameContinue(1.2f));
     }
 

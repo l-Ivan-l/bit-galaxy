@@ -18,7 +18,6 @@ public class PlanetScript : MonoBehaviour
     private SpriteRenderer frontRender;
 
     private float planetTranslationSpeed;
-    private float starsTranslationSpeed;
     public int planetState;
 
     public Transform centerPos;
