@@ -11,6 +11,12 @@ public class GunScript : MonoBehaviour
     public GameObject bullet;
     public GameObject fireEffect;
 
+    private AudioSource bulletSound;
+
+    void Awake() {
+      bulletSound = GetComponent<AudioSource>();
+    }
+
     void Start() {
       canShoot = false;
     }
@@ -29,6 +35,7 @@ public class GunScript : MonoBehaviour
     void Shoot() {
       if(Input.GetButtonDown("Shoot_Btn")) {
         if(canShoot) {
+          bulletSound.Play();
           Instantiate(fireEffect, firePoint.position, transform.rotation);
           Instantiate(bullet, firePoint.position, transform.rotation);
         }

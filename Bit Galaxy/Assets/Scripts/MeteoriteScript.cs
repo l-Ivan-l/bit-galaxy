@@ -50,6 +50,7 @@ public class MeteoriteScript : MonoBehaviour
         DestroyMeteorite();
       } else if(target.gameObject.CompareTag("Player")) {
         //GAME OVER
+        GameController.Instance.GameOver();
       }
     }
 

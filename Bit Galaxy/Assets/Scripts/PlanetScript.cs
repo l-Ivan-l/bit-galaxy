@@ -105,8 +105,10 @@ public class PlanetScript : MonoBehaviour
     }
 
     public void PlanetHited() {
-      currentLife -= 1f;
-      lifeBar.fillAmount = currentLife / planetLife;
+      if(transform.position == centerPos.position) {
+        currentLife -= 1f;
+        lifeBar.fillAmount = currentLife / planetLife;
+      }
       if(currentLife <= 0f) {
         //GAME OVER
         GameController.Instance.GameOver();

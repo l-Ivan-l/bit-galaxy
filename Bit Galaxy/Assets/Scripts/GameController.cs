@@ -39,10 +39,13 @@ public class GameController : MonoBehaviour
     public StarsScript starsBack_01;
     public StarsScript starsBack_02;
 
+    private AudioSource audioTransport;
+
     void Awake() {
       if(Instance == null) {
         Instance = this;
       }
+      audioTransport = GetComponent<AudioSource>();
     }
 
     void Start() {
@@ -74,6 +77,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator StartGame(float timer) {
       yield return new WaitForSeconds(timer);
+      audioTransport.Play();
       Instantiate(teletransportEffect, transform.position, Quaternion.identity);
       player.Teletransport_In(playerPos.position);
       Continuar();
@@ -151,6 +155,7 @@ public class GameController : MonoBehaviour
       planetsSaved += 1;
       planetsSavedText.text = "Planets: " + planetsSaved.ToString();
       meteoriteSystem.StopMeteorites();
+      audioTransport.Play();
       Instantiate(teletransportEffect, transform.position, player.gameObject.transform.rotation);
       player.Teletransport_Out();
       Pausar();
@@ -175,6 +180,7 @@ public class GameController : MonoBehaviour
 
     IEnumerator GameContinue(float timer) {
       yield return new WaitForSeconds(timer);
+      audioTransport.Play();
       Instantiate(teletransportEffect, transform.position, Quaternion.identity);
       player.Teletransport_In(playerPos.position);
       Continuar();
